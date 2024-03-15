@@ -1,4 +1,4 @@
-package com.example.demo.utils.mappers;
+package com.example.demo.utils;
 
 public class Constants {
 

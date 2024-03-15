@@ -4,16 +4,14 @@ import com.example.demo.data.DriverLocationJpa;
 import com.example.demo.dtos.LocationRequestDto;
 import com.example.demo.model.DriverLocation;
 import com.example.demo.service.DriverService;
-import com.example.demo.utils.mappers.DomainToJpaMapper;
+import com.example.demo.utils.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/drivers")
 public class DriverController {
 
     @Autowired
@@ -22,17 +20,17 @@ public class DriverController {
     @Autowired
     private DriverService driverService;
 
-    @PostMapping("/drivers/{id}/location")
+    @PostMapping("/{id}/location")
     public ResponseEntity<String> updateDriverLocation(@PathVariable Long id, @RequestBody LocationRequestDto locationRequest) {
 
         if (driverService.getDriverById(id) != null) {
             // Update database
             DriverLocationJpa driverLocationJpa =
-                    DomainToJpaMapper.toDriverLocationJpa(new DriverLocation(id, locationRequest.getLatitude(), locationRequest.getLongitude()));
+                    Mapper.toDriverLocationJpa(new DriverLocation(id, locationRequest.getLatitude(), locationRequest.getLongitude()));
             driverService.updateDriverLocation(id, driverLocationJpa);
 
             // Publish the driver location update event to Kafka topic
-            String topic = "driver-location-updates";
+            String topic = "driver-location-updates-topic";
             String message = String.format("%s,%f,%f", id, locationRequest.getLatitude(), locationRequest.getLongitude());
             kafkaTemplate.send(topic, message);
 
@@ -41,6 +39,5 @@ public class DriverController {
         else {
             return ResponseEntity.badRequest().body("Error updating driver Location.");
         }
-
     }
 }

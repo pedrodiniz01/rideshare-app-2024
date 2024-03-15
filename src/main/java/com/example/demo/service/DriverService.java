@@ -5,7 +5,7 @@ import com.example.demo.data.DriverLocationJpa;
 import com.example.demo.model.Driver;
 import com.example.demo.repository.DriverLocationRepositoryJpa;
 import com.example.demo.repository.UserDriverRepositoryJpa;
-import com.example.demo.utils.mappers.DomainToJpaMapper;
+import com.example.demo.utils.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +25,7 @@ public class DriverService {
     }
 
     public void registerUserDriver(Driver driver) {
-        DriverJpa driverJpa = DomainToJpaMapper.toDriverJPA(driver);
+        DriverJpa driverJpa = Mapper.toDriverJPA(driver);
         userDriverRepositoryJpa.save(driverJpa);
     }
 
@@ -46,6 +46,6 @@ public class DriverService {
 
     public Driver getDriverById(Long id) {
         Optional<DriverJpa> driverJpa = userDriverRepositoryJpa.findById(id);
-        return driverJpa.map(DomainToJpaMapper::toDriver).orElse(null);
+        return driverJpa.map(Mapper::toDriver).orElse(null);
     }
 }

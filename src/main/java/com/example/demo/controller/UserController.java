@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static com.example.demo.utils.mappers.Constants.DRIVER_USER_TYPE;
-import static com.example.demo.utils.mappers.Constants.RIDER_USER_TYPE;
+import static com.example.demo.utils.Constants.DRIVER_USER_TYPE;
+import static com.example.demo.utils.Constants.RIDER_USER_TYPE;
 
 @RestController
 @RequestMapping("/users")

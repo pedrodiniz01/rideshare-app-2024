@@ -17,7 +17,12 @@ public class KafkaTopicConfig {
     }
     @Bean
     public NewTopic driverLocationUpdatesTopic() {
-        return TopicBuilder.name("driver-location-updates")
+        return TopicBuilder.name("driver-location-updates-topic")
+                .build();
+    }
+    @Bean
+    public NewTopic riderRequestTopic() {
+        return TopicBuilder.name("ride-request-topic")
                 .build();
     }
 
