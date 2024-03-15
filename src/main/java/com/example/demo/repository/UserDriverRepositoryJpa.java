@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface DriverRepositoryJpa extends JpaRepository<DriverJpa, Long> {
+public interface UserDriverRepositoryJpa extends JpaRepository<DriverJpa, Long> {
 }

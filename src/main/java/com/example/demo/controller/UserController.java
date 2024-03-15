@@ -36,10 +36,10 @@ public class UserController {
         // Determine user type
         if (requestDto.getUserType().equalsIgnoreCase(RIDER_USER_TYPE)) {
             Rider rider = new Rider(requestDto.getName(), requestDto.getEmail(), UserType.RIDER);
-            riverService.registerRider(rider);
+            riverService.registerUserRider(rider);
         } else if (requestDto.getUserType().equalsIgnoreCase(DRIVER_USER_TYPE)) {
             Driver driver = new Driver(requestDto.getName(), requestDto.getEmail(),UserType.DRIVER);
-            driverService.registerDriver(driver);
+            driverService.registerUserDriver(driver);
         } else {
             return ResponseEntity.badRequest().body("Invalid user type.");
         }
