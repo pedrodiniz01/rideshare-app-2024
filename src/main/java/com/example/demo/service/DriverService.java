@@ -16,7 +16,7 @@ public class DriverService {
         this.driverRepositoryJpa = driverRepositoryJpa;
     }
 
-    public void save(Driver driver) {
+    public void registerDriver(Driver driver) {
         DriverJpa driverJpa = DomainToJpaMapper.toDriverJPA(driver);
         driverRepositoryJpa.save(driverJpa);
     }
