@@ -10,12 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import static com.example.demo.utils.mappers.Constants.DRIVER_USER_TYPE;
 import static com.example.demo.utils.mappers.Constants.RIDER_USER_TYPE;
 
 @RestController
+@RequestMapping("/users")
 public class UserController {
 
     @Autowired
