@@ -1,20 +1,17 @@
 package com.example.demo.controller;
 
-import com.example.demo.data.DriverLocationJpa;
 import com.example.demo.data.RiderRequestJpa;
 import com.example.demo.dtos.RideRequestDTO;
-import com.example.demo.model.DriverLocation;
+import com.example.demo.model.Driver;
 import com.example.demo.model.RiderRequest;
 import com.example.demo.service.DriverService;
 import com.example.demo.service.RiderService;
 import com.example.demo.utils.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/rides")
@@ -24,10 +21,12 @@ public class RiderController {
 
     @Autowired
     private RiderService riderService;
+    @Autowired
+    private DriverService driverService;
 
     @PostMapping("/request")
     public ResponseEntity<String> requestRide(@RequestBody RideRequestDTO rideRequest) {
-        if (riderService.getDriverById(rideRequest.getRiderId()) != null) {
+        if (riderService.getRiderById(rideRequest.getRiderId()) != null) {
             // Update database
             RiderRequestJpa rideRequestJpa =
                     Mapper.toRiderRequestJpa(new RiderRequest(rideRequest.getRiderId(), rideRequest.getLatitudePickUp(), rideRequest.getLongitudePickUp(),
@@ -44,9 +43,23 @@ public class RiderController {
             kafkaTemplate.send(topic, message);
 
             return ResponseEntity.ok("Rider Request Created.");
+        } else {
+            return ResponseEntity.badRequest().body("Error creating Rider Request.");
+        }
+    }
+
+    @GetMapping("/find-driver/{rideId}")
+    public ResponseEntity<String> findNearestDriver(@PathVariable Long rideId) {
+        // Validate rideId exists
+        if (riderService.getRideById(rideId) != null) {
+            Long nearestDriverId = driverService.findNearestDriverId(riderService.getRideById(rideId));
+
+            Driver driver = driverService.getDriverById(nearestDriverId);
+
+            return new ResponseEntity<>(driver.toString(), HttpStatus.OK);
         }
         else {
-            return ResponseEntity.badRequest().body("Error creating Rider Request.");
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }

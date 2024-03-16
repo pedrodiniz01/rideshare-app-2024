@@ -1,12 +1,10 @@
 package com.example.demo.data;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name="RidersLocation")
+@Table(name="RidersRequest")
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
@@ -14,7 +12,9 @@ import lombok.*;
 @ToString
 public class RiderRequestJpa {
     @Id
-    private Long RiderId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long rideId;
+    private Long riderId;
     private double latitudePickUp;
     private double longitudePickUp;
     private double latitudeDropOff;

@@ -3,12 +3,14 @@ package com.example.demo.service;
 import com.example.demo.data.DriverJpa;
 import com.example.demo.data.DriverLocationJpa;
 import com.example.demo.model.Driver;
+import com.example.demo.model.RiderRequest;
 import com.example.demo.repository.DriverLocationRepositoryJpa;
 import com.example.demo.repository.UserDriverRepositoryJpa;
 import com.example.demo.utils.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -47,5 +49,28 @@ public class DriverService {
     public Driver getDriverById(Long id) {
         Optional<DriverJpa> driverJpa = userDriverRepositoryJpa.findById(id);
         return driverJpa.map(Mapper::toDriver).orElse(null);
+    }
+
+    public Long findNearestDriverId(RiderRequest riderRequest) {
+        List<DriverLocationJpa> driverLocations = driverLocationRepositoryJpa.findAll();
+
+        double minDistance = Double.MAX_VALUE;
+        Long nearestDriverId = null;
+
+        for (DriverLocationJpa driverLocation : driverLocations) {
+            double distance = calculateDistance(riderRequest.getLatitudePickUp(), riderRequest.getLongitudePickUp(),
+                    driverLocation.getLatitude(), driverLocation.getLongitude());
+
+            if (distance < minDistance) {
+                minDistance = distance;
+                nearestDriverId = driverLocation.getDriverId();
+            }
+        }
+
+        return nearestDriverId;
+    }
+
+    private double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
+        return Math.abs(lon2 - lon1) + Math.abs(lat2 - lat1);
     }
 }

@@ -26,7 +26,11 @@ public class Mapper {
         return new DriverLocationJpa(driverLocation.getDriverId(), driverLocation.getLatitude(), driverLocation.getLongitude());
     }
     public static RiderRequestJpa toRiderRequestJpa(RiderRequest riderRequest) {
-        return new RiderRequestJpa(riderRequest.getRiderId(), riderRequest.getLatitudePickUp(),
+        return new RiderRequestJpa(null, riderRequest.getRiderId(), riderRequest.getLatitudePickUp(),
                 riderRequest.getLongitudePickUp(), riderRequest.getLatitudeDropOff(), riderRequest.getLatitudeDropOff());
+    }
+    public static RiderRequest toRiderRequest(RiderRequestJpa riderRequestJpa) {
+        return new RiderRequest(riderRequestJpa.getRiderId(), riderRequestJpa.getLatitudePickUp(),
+                riderRequestJpa.getLongitudePickUp(), riderRequestJpa.getLatitudeDropOff(), riderRequestJpa.getLatitudeDropOff());
     }
 }
