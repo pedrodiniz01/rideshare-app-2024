@@ -13,7 +13,7 @@ public class KafkaConsumer {
     private RideRequestAcceptedRepositoryJpa rideRequestAcceptedRepositoryJpa;
 
     @KafkaListener(topics = "driver-location-updates-topic", groupId = "group")
-    public void listenDriverLocationUpdates(String message) {
+    public void notifyDriverLocationUpdates(String message) {
         System.out.println("Driver Location Updates: " + message);
     }
     @KafkaListener(topics = "ride-request-topic", groupId = "group")
