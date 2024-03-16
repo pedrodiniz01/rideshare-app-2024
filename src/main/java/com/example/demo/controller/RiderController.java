@@ -52,13 +52,21 @@ public class RiderController {
     public ResponseEntity<String> findNearestDriver(@PathVariable Long rideId) {
         // Validate rideId exists
         if (riderService.getRideById(rideId) != null) {
+            RiderRequest riderRequest = riderService.getRideById(rideId);
             Long nearestDriverId = driverService.findNearestDriverId(riderService.getRideById(rideId));
 
             Driver driver = driverService.getDriverById(nearestDriverId);
 
+            // Publish the ride request acceptance event to Kafka topic
+            String topic = "ride-request-acceptance-topic";
+            String message = String.format("Driver Id %s will pick up User Id %s",
+                    nearestDriverId,
+                    riderRequest.getRiderId());
+
+            kafkaTemplate.send(topic, message);
+
             return new ResponseEntity<>(driver.toString(), HttpStatus.OK);
-        }
-        else {
+        } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }

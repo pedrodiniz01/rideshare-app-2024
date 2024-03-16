@@ -11,8 +11,13 @@ public class KafkaConsumer {
         System.out.println("Driver Location Updates: " + message);
     }
     @KafkaListener(topics = "ride-request-topic", groupId = "group")
-    public void listenRideRequest(String message) {
-        System.out.println("Rider Request: " + message);
+    public void notifyRideRequest(String message) {
+        System.out.println("New Ride Request: " + message);
+    }
+
+    @KafkaListener(topics = "ride-request-acceptance-topic", groupId = "group")
+    public void notifyRideRequestAcceptance(String message) {
+        System.out.println("New Ride Request Accepted: " + message);
     }
 
 }

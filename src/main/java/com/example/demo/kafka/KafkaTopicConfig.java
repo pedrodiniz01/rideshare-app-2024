@@ -9,20 +9,18 @@ import org.springframework.kafka.config.TopicBuilder;
 public class KafkaTopicConfig {
 
     @Bean
-    public NewTopic myTopic() {
-        return TopicBuilder.name("topic")
-                .partitions(1)
-                .replicas(1)
-                .build();
-    }
-    @Bean
-    public NewTopic driverLocationUpdatesTopic() {
+    public NewTopic driversLocationUpdateTopic() {
         return TopicBuilder.name("driver-location-updates-topic")
                 .build();
     }
     @Bean
     public NewTopic riderRequestTopic() {
         return TopicBuilder.name("ride-request-topic")
+                .build();
+    }
+    @Bean
+    public NewTopic riderRequestAcceptanceTopic() {
+        return TopicBuilder.name("ride-request-acceptance-topic")
                 .build();
     }
 
