@@ -23,11 +23,11 @@ public class UserController {
     @Autowired
     private DriverService driverService;
     @Autowired
-    private RiderService riverService;
+    private RiderService riderService;
 
-    public UserController(DriverService driverService, RiderService riverService) {
+    public UserController(DriverService driverService, RiderService riderService) {
         this.driverService = driverService;
-        this.riverService = riverService;
+        this.riderService = riderService;
     }
 
     @PostMapping("/register")
@@ -41,7 +41,7 @@ public class UserController {
         // Determine user type
         if (requestDto.getUserType().equalsIgnoreCase(RIDER_USER_TYPE)) {
             Rider rider = new Rider(requestDto.getName(), requestDto.getEmail(), UserType.RIDER);
-            riverService.registerUserRider(rider);
+            riderService.registerUserRider(rider);
         } else if (requestDto.getUserType().equalsIgnoreCase(DRIVER_USER_TYPE)) {
             Driver driver = new Driver(requestDto.getName(), requestDto.getEmail(),UserType.DRIVER);
             driverService.registerUserDriver(driver);

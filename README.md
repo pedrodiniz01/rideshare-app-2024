@@ -23,9 +23,6 @@ To check the database storage, a H2 memory database is utilized. Access the data
 - JDBC URL: **jdbc:h2:mem:testdb**
 - DB Username: **sa**
 - DB Password: **password**
-- 
-#### Data:
-I added some mock data in application startup.
 
 You are ready to start simulating with requests and access database =).
 
