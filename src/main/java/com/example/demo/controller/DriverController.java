@@ -33,7 +33,7 @@ public class DriverController {
 
             // Publish the driver location update event to Kafka topic
             String topic = "driver-location-updates-topic";
-            String message = String.format("%s,%f,%f", id, locationRequest.getLatitude(), locationRequest.getLongitude());
+            String message = String.format("Driver %s is at latitude %f longitude %f.", id, locationRequest.getLatitude(), locationRequest.getLongitude());
             kafkaTemplate.send(topic, message);
 
             return ResponseEntity.ok("Driver location updated.");
