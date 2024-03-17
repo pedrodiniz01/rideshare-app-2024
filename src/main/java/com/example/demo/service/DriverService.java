@@ -31,7 +31,6 @@ public class DriverService {
         userDriverRepositoryJpa.save(driverJpa);
     }
 
-
     public void updateDriverLocation(Long id, DriverLocationJpa driverLocationJpa) {
         Optional<DriverLocationJpa> optionalDriverLocation = driverLocationRepositoryJpa.findById(id);
 

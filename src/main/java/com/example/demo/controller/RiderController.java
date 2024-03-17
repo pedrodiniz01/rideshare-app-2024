@@ -34,7 +34,7 @@ public class RiderController {
                             rideRequest.getLatitudeDropOff(), rideRequest.getLongitudeDropOff()));
             riderService.createRiderRequest(rideRequestJpa);
 
-            // Publish the driver location update event to Kafka topic
+            // Publish driver location update event to Kafka topic
             String topic = "ride-request-topic";
             String message = String.format("User %s is at location %.6f,%.6f and destination is at %.6f,%.6f",
                     rideRequest.getRiderId(),
@@ -58,7 +58,7 @@ public class RiderController {
 
             Driver driver = driverService.getDriverById(nearestDriverId);
 
-            // Publish the ride request acceptance event to Kafka topic
+            // Publish ride request acceptance event to Kafka topic
             String topic = "ride-request-acceptance-topic";
             String message = String.format("Driver Id %s will pick up User Id %s",
                     nearestDriverId,

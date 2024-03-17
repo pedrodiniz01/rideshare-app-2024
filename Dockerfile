@@ -28,5 +28,4 @@ COPY --from=builder /app/target/rideshare-0.0.1-SNAPSHOT.jar .
 # Expose the ports for Spring Boot and Kafka
 EXPOSE 8080
 
-# Start the application
-CMD ["java", "-jar", "rideshare-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "rideshare-0.0.1-SNAPSHOT.jar", "-web -webAllowOthers -tcp -tcpAllowOthers -browser"]
