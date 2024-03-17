@@ -3,6 +3,28 @@
 The rideshare project is a backend application developed in Spring Boot integrated with Apache Kafka for a rideshare platform.
 
 # Application setup
+There's a docker compose file that quickly instantiates a kafka, zookeper and rideshare container. These 3 containers are ready communicate with eachother. 
+Simple run:
+```bash
+docker-compose up
+```
+
+#### Postman Collection:
+You can find a Postman collection containing interactions with all API endpoints at ./rideshare/postman folder.
+
+#### Spring Boot Application URL:
+The Spring Boot application runs at http://localhost:8080.
+
+#### Database Storage:
+To check the database storage, a H2 memory database is utilized. Access the database console at: http://localhost:8080/h2-console
+
+#### Database Configuration:
+
+- JDBC URL: **jdbc:h2:mem:testdb**
+- DB Username: **sa**
+- DB Password: **password**
+
+You are ready to start simulating with requests and access database =).
 
 # API endpoints
 
@@ -89,7 +111,7 @@ This API endpoint allows users to register as either riders or drivers.
 
 # Notification System
 - I created kafka consumers that read from the desired topics and "notify" using SystemOutPrintLn the received messages.
-- Additionally when there's a match between a driver and rider, the consumer reads the message and saves it on database.
+- Additionally when there's a match between a driver and rider, the consumer reads from topic "**ride-request-acceptance-topic**" and saves it on database.
 
 # Find Driver Near Me - Matching Algorithm
 I used a very simple algorithm to measure the distance between driver and rider request, named Manhattan Distance Calculation algorithm.
@@ -103,7 +125,6 @@ The Java function will essentially iterate through all driver locations, applyin
 # Potential Improvements And Additional Comments
 - I found the exercise very interesting challenge and fun. It provided me with the opportunity to learn a few new things along the way.
 - Unfortunately, I didn't have the desired amount of time to complete the exercise as I had hoped, mainly due to being out of town over the weekend.
-- There's a folder named postman with all the requests used for the application.
 
 
 ## Potential Improvements
@@ -111,5 +132,6 @@ The Java function will essentially iterate through all driver locations, applyin
 - I would implement more design patterns. A few that would improve code quality would be Builder, Factory method.
 - There are alot of more complex validation in order to control edge cases
 - Improve error handling.
+- Develop API swagger to easily understand how APIs work.
 - There's more work to do in order to respect SOLID and GRASP principles and improve work quality overall.
 

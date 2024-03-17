@@ -1,4 +1,4 @@
-# Use a base image with Maven installed
+# Maven base image
 FROM maven:3.8.4 AS builder
 
 # Set the working directory
@@ -13,7 +13,7 @@ RUN mvn dependency:go-offline
 # Copy the source code
 COPY src ./src
 
-# Build the application
+# Create .jar
 RUN mvn clean install
 
 # Start a new stage
