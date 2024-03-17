@@ -23,7 +23,9 @@ public class DriverController {
     @PostMapping("/{id}/location")
     public ResponseEntity<String> updateDriverLocation(@PathVariable Long id, @RequestBody LocationRequestDto locationRequest) {
 
+        // Simple validation Driver Exists
         if (driverService.getDriverById(id) != null) {
+
             // Update database
             DriverLocationJpa driverLocationJpa =
                     Mapper.toDriverLocationJpa(new DriverLocation(id, locationRequest.getLatitude(), locationRequest.getLongitude()));

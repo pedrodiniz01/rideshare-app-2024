@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 public class RiderController {
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
-
     @Autowired
     private RiderService riderService;
     @Autowired
@@ -26,7 +25,9 @@ public class RiderController {
 
     @PostMapping("/request")
     public ResponseEntity<String> requestRide(@RequestBody RideRequestDTO rideRequest) {
+        // Simple validation Rider exists
         if (riderService.getRiderById(rideRequest.getRiderId()) != null) {
+
             // Update database
             RiderRequestJpa rideRequestJpa =
                     Mapper.toRiderRequestJpa(new RiderRequest(rideRequest.getRiderId(), rideRequest.getLatitudePickUp(), rideRequest.getLongitudePickUp(),
@@ -50,9 +51,9 @@ public class RiderController {
 
     @GetMapping("/find-driver/{rideId}")
     public ResponseEntity<String> findNearestDriver(@PathVariable Long rideId) {
-        // Validate rideId exists
+
+        // Simple validation ride exists
         if (riderService.getRideById(rideId) != null) {
-            RiderRequest riderRequest = riderService.getRideById(rideId);
             Long nearestDriverId = driverService.findNearestDriverId(riderService.getRideById(rideId));
 
             Driver driver = driverService.getDriverById(nearestDriverId);
@@ -61,7 +62,7 @@ public class RiderController {
             String topic = "ride-request-acceptance-topic";
             String message = String.format("Driver Id %s will pick up User Id %s",
                     nearestDriverId,
-                    riderRequest.getRiderId());
+                    rideId);
 
             kafkaTemplate.send(topic, message);
 

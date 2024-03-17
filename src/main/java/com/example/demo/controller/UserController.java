@@ -25,6 +25,11 @@ public class UserController {
     @Autowired
     private RiderService riverService;
 
+    public UserController(DriverService driverService, RiderService riverService) {
+        this.driverService = driverService;
+        this.riverService = riverService;
+    }
+
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody UserRequestDto requestDto) {
 

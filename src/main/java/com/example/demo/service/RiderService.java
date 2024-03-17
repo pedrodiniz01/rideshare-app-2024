@@ -36,14 +36,7 @@ public class RiderService {
 
         // Validate if user exists
         if (optionalUserRider.isPresent()) {
-            RiderRequestJpa newRiderRequestLocation = new RiderRequestJpa();
-            newRiderRequestLocation.setRiderId(riderRequestJpa.getRiderId());
-            newRiderRequestLocation.setLatitudePickUp(riderRequestJpa.getLatitudePickUp());
-            newRiderRequestLocation.setLongitudePickUp(riderRequestJpa.getLongitudePickUp());
-            newRiderRequestLocation.setLatitudeDropOff(riderRequestJpa.getLatitudeDropOff());
-            newRiderRequestLocation.setLongitudeDropOff(riderRequestJpa.getLongitudeDropOff());
-
-            riderRequestRepositoryJpa.save(newRiderRequestLocation);
+            riderRequestRepositoryJpa.save(riderRequestJpa);
         }
     }
 
