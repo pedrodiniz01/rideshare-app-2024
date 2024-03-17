@@ -5,13 +5,16 @@ import com.example.demo.dtos.UserRequestDto;
 import com.example.demo.service.DriverService;
 import com.example.demo.service.RiderService;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 public class ApiTesting {
 
     @Mock
@@ -23,7 +26,7 @@ public class ApiTesting {
     @Test
     public void testRegisterUser_validUserType() {
         // Arrange
-        UserRequestDto requestDto = new UserRequestDto("John Doe", "john@example.com", "rider");
+        UserRequestDto requestDto = new UserRequestDto("Pedro", "pedrodiniz@ceiia.com", "rider");
         UserController controller = new UserController(driverService, riderService);
 
         // Act
@@ -36,7 +39,7 @@ public class ApiTesting {
     @Test
     public void testRegisterUser_invalidUserType() {
         // Arrange
-        UserRequestDto requestDto = new UserRequestDto("John Doe", "john@example.com", "what");
+        UserRequestDto requestDto = new UserRequestDto("Pedro", "pedrodiniz@ceiia.com", "whatever");
         UserController controller = new UserController(driverService, riderService);
 
         // Act
