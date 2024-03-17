@@ -128,7 +128,7 @@ The Java function will essentially iterate through all driver locations, applyin
 # 5. Opinion on Exercise
 - I found the exercise very interesting, challenging and fun. It provided me with the opportunity to learn a few new things along the way.
 
-## 6. Potential Improvements
+# 6. Potential Improvements
 Since I was out of town during the exercise period, I nominated a few points I would like to have improved.
 
 - The first point I would improve would be database scheme and matching algorithm. I would research for a better matching alogirthm and implement a more efficient way to compare driver and rider location (using partitions maybe?).
