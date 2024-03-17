@@ -132,7 +132,7 @@ The Java function will essentially iterate through all driver locations, applyin
 Since I was out of town during the exercise period, I nominated a few points I would like to have improved.
 
 - The first point I would improve would be database scheme and matching algorithm. I would research for a better matching alogirthm and implement a more efficient way to compare driver and rider location (using partitions maybe?).
-- I would implement more design patterns. A few that would improve code quality would be Builder, Factory method.
+- I would implement more design patterns. A few that would improve code quality would be Builder, Factory method, for example.
 - There are alot of more complex validation in order to control edge cases.
 - Improve error handling.
 - Develop API swagger to easily understand how APIs work.
