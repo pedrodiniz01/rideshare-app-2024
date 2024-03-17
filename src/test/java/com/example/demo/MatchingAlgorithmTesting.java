@@ -3,13 +3,10 @@ package com.example.demo;
 import com.example.demo.data.DriverLocationJpa;
 import com.example.demo.model.RiderRequest;
 import com.example.demo.repository.DriverLocationRepositoryJpa;
-import com.example.demo.repository.UserDriverRepositoryJpa;
 import com.example.demo.service.DriverService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
