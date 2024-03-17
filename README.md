@@ -4,7 +4,7 @@ The rideshare project is a backend application developed in Spring Boot integrat
 
 # 1. Application setup
 There's a docker compose file that quickly instantiates a kafka, zookeper and rideshare container. These 3 containers are ready communicate with eachother. 
-Simple run:
+Deployment is very simple, just run:
 ```bash
 docker-compose up
 ```
