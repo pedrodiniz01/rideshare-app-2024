@@ -2,7 +2,7 @@
 
 The rideshare project is a backend application developed in Spring Boot integrated with Apache Kafka for a rideshare platform.
 
-# Application setup
+# 1. Application setup
 There's a docker compose file that quickly instantiates a kafka, zookeper and rideshare container. These 3 containers are ready communicate with eachother. 
 Simple run:
 ```bash
@@ -23,12 +23,15 @@ To check the database storage, a H2 memory database is utilized. Access the data
 - JDBC URL: **jdbc:h2:mem:testdb**
 - DB Username: **sa**
 - DB Password: **password**
+- 
+#### Data:
+I added some mock data in application startup.
 
 You are ready to start simulating with requests and access database =).
 
-# API endpoints
+# 2. API endpoints
 
-## API: Update Driver Location
+## 2.1 API: Update Driver Location
 This API endpoint is used to update the location of the driver.
 
 ### Workflow
@@ -48,7 +51,7 @@ This API endpoint is used to update the location of the driver.
 - **Bad Request (400)**: Returns an error message if the driver with the specified ID does not exist or if there is an issue updating the location.
 
 
-## API Endpoint: Request Ride
+## 2.2 API Endpoint: Request Ride
 This API endpoint allows a rider to request a ride by providing their pickup and drop-off locations.
 
 ### Workflow
@@ -72,7 +75,7 @@ This API endpoint allows a rider to request a ride by providing their pickup and
 
 
 
-## API: Find Nearest Driver
+## 2.3 API: Find Nearest Driver
 This API endpoint is used to find the nearest available driver for a given ride.
 
 ### Workflow
@@ -90,7 +93,7 @@ This API endpoint is used to find the nearest available driver for a given ride.
 
 
 
-## API: Register User
+## 2.4 API: Register User
 
 This API endpoint allows users to register as either riders or drivers.
 
@@ -109,29 +112,29 @@ This API endpoint allows users to register as either riders or drivers.
 - **Success (200 OK)**: Returns a success message indicating that the user has been registered successfully.
 - **Bad Request (400)**: Returns an error message if the registration request is invalid or if the user type is not recognized.
 
-# Notification System
+# 3. Notification System
 - I created kafka consumers that read from the desired topics and "notify" using SystemOutPrintLn the received messages.
 - Additionally when there's a match between a driver and rider, the consumer reads from topic "**ride-request-acceptance-topic**" and saves it on database.
 
-# Find Driver Near Me - Matching Algorithm
+# 4. Find Driver Near Me - Matching Algorithm
 I used a very simple algorithm to measure the distance between driver and rider request, named Manhattan Distance Calculation algorithm.
 
-## Formula
+## 4.1 Formula
 Math.abs(lon2 - lon1) + Math.abs(lat2 - lat1);
 
-## Explanation
+## 4.2 Explanation
 The Java function will essentially iterate through all driver locations, applying the formula to calculate distances. It then returns the shortest distance to determine the most suitable driver for the given scenario.
 
-# Potential Improvements And Additional Comments
-- I found the exercise very interesting challenge and fun. It provided me with the opportunity to learn a few new things along the way.
-- Unfortunately, I didn't have the desired amount of time to complete the exercise as I had hoped, mainly due to being out of town over the weekend.
+# 5. Opinion on Exercise
+- I found the exercise very interesting, challenging and fun. It provided me with the opportunity to learn a few new things along the way.
 
+## 6. Potential Improvements
+Since I was out of town during the exercise period, I nominated a few points I would like to have improved.
 
-## Potential Improvements
-- The first point I would improve would be database scheme and matching algorithm. I would research for a better matching alogirthm and implement a more efficient way to compare driver and rider location (using partitions maybe??).
+- The first point I would improve would be database scheme and matching algorithm. I would research for a better matching alogirthm and implement a more efficient way to compare driver and rider location (using partitions maybe?).
 - I would implement more design patterns. A few that would improve code quality would be Builder, Factory method.
-- There are alot of more complex validation in order to control edge cases
+- There are alot of more complex validation in order to control edge cases.
 - Improve error handling.
 - Develop API swagger to easily understand how APIs work.
-- There's more work to do in order to respect SOLID and GRASP principles and improve work quality overall.
+- There's more work to do in order to respect SOLID and GRASP principles and improve work quality overall (isolate better class responsabilities).
 
