@@ -13,7 +13,7 @@ docker-compose up
 You can find a Postman collection containing interactions with all API endpoints at ./rideshare/postman folder.
 
 #### Spring Boot Application URL:
-The Spring Boot application runs at http://localhost:8080.
+The Spring Boot application runs at port :8080.
 
 #### Database Storage:
 To check the database storage, a H2 memory database is utilized. Access the database console at: http://localhost:8080/h2-console
