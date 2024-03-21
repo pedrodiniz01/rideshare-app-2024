@@ -18,6 +18,6 @@ The Spring Boot application runs at port :8080.
 #### Database Storage:
 To check the database storage, a H2 memory database is utilized. Access the database console at: http://localhost:8080/h2-console
 
-You are ready to start simulating with requests and access database =).
+You are ready to start simulating with requests and access database =)
 
 
